@@ -12,14 +12,14 @@ const questions = [
         type: 'input',
         message: "What is your employee ID number?",
         name: "id", 
-        default: "ID NUMBER",
+        default: "ID Number",
         
     },
     {
         type: 'input',
         message: 'What is your office number?',
         name: "office",
-        default: "Office number",
+        default: "Office Number",
     },
   
 ]

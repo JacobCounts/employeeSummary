@@ -5,7 +5,8 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 const questions = require("./questions");
-
+//const Employee = require("./employee")
+//const Engineer = require("./engineer")
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -16,7 +17,9 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 inquirer.prompt(questions).then((response) => {
     console.log(response);
-})
+   
+    
+});
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
