@@ -5,25 +5,35 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 const questions = require("./questions");
-//const Employee = require("./employee")
-//const Engineer = require("./engineer")
+
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+console.log(render([new Manager("jake", 1, "@this.com", 1234)]));
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-inquirer.prompt(questions).then((response) => {
-    console.log(response);
+
+// inquirer.prompt(questions).then((response) => {
+//     console.log(response);
    
     
-});
+// });
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+
+
+    
+//     new Engineer(""),
+//     new Intern(""),
+// ])
+
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
@@ -40,3 +50,34 @@ inquirer.prompt(questions).then((response) => {
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+
+
+//tucker code
+// const inquirer = require("inquirer");
+// const employees = [];
+// function promptUser() {
+//   inquirer
+//     .prompt([
+//       {
+//         message: "What is your name",
+//         name: "name",
+//         type: "input",
+//       },
+//       {
+//         message: "Do you want to do this again?",
+//         name: "another",
+//         type: "confirm",
+//       },
+//     ])
+//     .then(function (user) {
+//       employees.push(user);
+//       if (user.another) {
+//         promptUser();
+//       } else {
+//         console.log("All done");
+//       }
+//       console.log(employees);
+//     });
+// }
