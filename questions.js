@@ -17,9 +17,30 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'What is your office number?',
+        message: "What is your email?",
+        name: "email", 
+        default: "johndoe@mail.com",
+        
+    },
+    {
+        type: 'input',
+        message: 'What is your office phone number?',
         name: "office",
         default: "Office Number",
+    },
+    {
+        type: 'input',
+        message: "What is your Github user name?",
+        name: "github", 
+        default: "Github user name",
+        
+    },
+    {
+        type: 'input',
+        message: "What school do you attend?",
+        name: "school", 
+        default: "",
+        
     },
   
 ]
