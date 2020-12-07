@@ -12,8 +12,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const person = [];
-
-// console.log(render([new Manager("jake", 1, "@this.com", 1234)]));
+const idarr = [];
+//console.log(render([new Manager("jake", 1, "@this.com", 1234)]));
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -29,158 +29,275 @@ const person = [];
 //          let email = response.email;
 // });
 function startPrompt() {
-    newEmployee()
+  newEmployee();
 }
-startPrompt(); 
+startPrompt();
 
-
-function newEmployee () {
-    inquirer.prompt ([
-        {
-            type: 'list',
-            message: 'Select type of team member',
-            name: "addEmployee",
-            choices: ["Manager", "Intern", "Engineer", "I dont want to add anymore"]
-        },
+function newEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "Select type of team member",
+        name: "addEmployee",
+        choices: [
+          "Manager",
+          "Intern",
+          "Engineer",
+          "I dont want to add anymore",
+        ],
+      },
     ])
-    .then(response => {
-        if (response.addEmployee === "Manager") {
-            newManager();
-        }
-        else if (response.addEmployee === "Intern") {
-            newIntern();
-        }
-        else if (response.addEmployee === "Engineer") {
-            newEngineer();
-        }
-        else if (response.addEmployee === "I dont want to add anymore") {
-            writeToFile(render(person));
-           
-        }
-    })
+    .then((response) => {
+      if (response.addEmployee === "Manager") {
+        newManager();
+      } else if (response.addEmployee === "Intern") {
+        newIntern();
+      } else if (response.addEmployee === "Engineer") {
+        newEngineer();
+      } else if (response.addEmployee === "I dont want to add anymore") {
+        writeToFile(render(person));
+      }
+    });
 }
 
-function newManager () {
-    inquirer.prompt ([
-        {
-            type: 'input',
-            message: "Please enter name",
-            name: "name",
-        },
-        {
-            type: 'input',
-            message: "Please enter your ID number",
-            name: "id",
-        },
-        {
-            type: 'input',
-            message: "Please enter your email",
-            name: "email",
-        },{
-            type: 'input',
-            message: "Please enter office phone number",
-            name: "officeNumber",
-        },
+function newManager() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Please enter name",
+        name: "name",
+        validate: function (name) {
+            if (name === "") {
+              return "Please add at least one character";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter your ID number",
+        name: "id",
+        validate: function (id) {
+            console.log(id);
+            var id2 = parseInt(id);
+  
+            if (isNaN(id2)) {
+              return "Please enter a number";
+            } else if (idarr.includes(id2)) {
+              return "Id already used";
+            } else if (id2 <= 0) {
+              return "Please include a positive number";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter your email",
+        name: "email",
+        validate: function (email) {
+            if (email === "") {
+              return "Please add a valid name";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter office phone number",
+        name: "officeNumber",
+        validate: function (officeNumber) {
+            if (officeNumber === "") {
+              return "Please enter a valid number";
+            } else {
+              return true;
+            }
+          },
+      },
     ])
-    .then(response => {
-        let name = response.name;
-        let id = response.id;
-        let email = response.email;
-        let officeNumber = response.officeNumber;
+    .then((response) => {
+      let name = response.name;
+      let id = response.id;
+      let email = response.email;
+      let officeNumber = response.officeNumber;
 
-        const managerInfo = new Manager(name, id, email, officeNumber)
-        person.push(managerInfo)
-        newEmployee();
-    })
+      const managerInfo = new Manager(name, id, email, officeNumber);
+      person.push(managerInfo);
+      newEmployee();
+      //getofficeNumber();
+    });
 }
 
-function newEngineer () {
-    inquirer.prompt ([
-        {
-            type: 'input',
-            message: "Please enter name",
-            name: "name",
-        },
-        {
-            type: 'input',
-            message: "Please enter your ID number",
-            name: "id",
-        },
-        {
-            type: 'input',
-            message: "Please enter your email",
-            name: "email",
-        },{
-            type: 'input',
-            message: "Please enter your Github username",
-            name: "github",
-        },
+function newEngineer() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Please enter name",
+        name: "name",
+        validate: function (name) {
+            if (name === "") {
+              return "Please add at least one character";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter your ID number",
+        name: "id",
+        validate: function (id) {
+            console.log(id);
+            var id2 = parseInt(id);
+  
+            if (isNaN(id2)) {
+              return "Please enter a number";
+            } else if (idarr.includes(id2)) {
+              return "Id already used";
+            } else if (id2 <= 0) {
+              return "Please include a positive number";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter your email",
+        name: "email",
+        validate: function (email) {
+            if (email === "") {
+              return "Please add a valid name";
+            } else {
+              return true;
+            }
+          },
+      },
+      {
+        type: "input",
+        message: "Please enter your Github username",
+        name: "github",
+        validate: function (github) {
+            if (github === "") {
+              return "Please add a valid github";
+            } else {
+              return true;
+            }
+          },
+      },
     ])
-    .then(response => {
-        let name = response.name;
-        let id = response.id;
-        let email = response.email;
-        let github = response.github;
+      
+    
+    .then((response) => {
+      let name = response.name;
+      let id = response.id;
+      let email = response.email;
+      let github = response.github;
 
-        const engineerInfo = new Engineer(name, id, email, github)
-        person.push(engineerInfo)
-        newEmployee();
-    })
+      const engineerInfo = new Engineer(name, id, email, github);
+      person.push(engineerInfo);
+      newEmployee();
+    });
 }
 
-function newIntern () {
-    inquirer.prompt ([
-        {
-            type: 'input',
-            message: "Please enter name",
-            name: "name",
+const newIntern = function () {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Please enter name",
+        name: "name",
+        validate: function (name) {
+          if (name === "") {
+            return "Please add at least one character";
+          } else {
+            return true;
+          }
         },
-        {
-            type: 'input',
-            message: "Please enter your ID number",
-            name: "id",
+      },
+      {
+        type: "input",
+        message: "Please enter your ID number",
+        name: "id",
+        validate: function (id) {
+          console.log(id);
+          var id2 = parseInt(id);
+
+          if (isNaN(id2)) {
+            return "Please enter a number";
+          } else if (idarr.includes(id2)) {
+            return "Id already used";
+          } else if (id2 <= 0) {
+            return "Please include a positive number";
+          } else {
+            return true;
+          }
         },
-        {
-            type: 'input',
-            message: "Please enter your email",
-            name: "email",
-        },{
-            type: 'input',
-            message: "Please enter your school",
-            name: "school",
+      },
+      {
+        type: "input",
+        message: "Please enter your email",
+        name: "email",
+        validate: function (email) {
+          if (email === "") {
+            return "Please add a valid name";
+          } else {
+            return true;
+          }
         },
+      },
+
+      {
+        type: "input",
+        message: "Please enter your school",
+        name: "school",
+        validate: function (school) {
+            if (school === "") {
+              return "Please add a valid school";
+            } else {
+              return true;
+            }
+          },
+      },
     ])
-    .then(response => {
-        let name = response.name;
-        let id = response.id;
-        let email = response.email;
-        let school = response.school;
+    .then((response) => {
+      let name = response.name;
+      let id = response.id;
+      let email = response.email;
+      let school = response.school;
 
-        const internInfo = new Intern(name, id, email, school)
-        person.push(internInfo)
-        newEmployee();
-    })
+      const internInfo = new Intern(name, id, email, school);
+      person.push(internInfo);
+      newEmployee();
+    });
+};
+
+function writeToFile(data) {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  return fs.writeFile(outputPath, data, function (error) {
+    if (error) {
+      console.log("Sorry there was a problem");
+    } else {
+      console.log("Complete");
+    }
+  });
 }
 
-function writeToFile (response) {
-    return fs.writeFile(outputPath, response, function(error) {
-        if (error) {
-            console.log("Sorry there was a problem")
-        }else{
-            console.log("Complete")
-        }
-    })
-}
-
-
-
-        
-        
-       
-            
-
-
-
+// const employees =
+//     [
+//     new Engineer(name, id, email, github),
+//     new Intern(name, id, email, school),
+//     new Manager(name, id, email, officeNumber)
+//     ];
+// fs.writeFile(outputPath, render(employees), () => {});
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -201,6 +318,3 @@ function writeToFile (response) {
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-
-// const inquirer = require("inquirer");
-
